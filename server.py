@@ -6,14 +6,14 @@ SERVER = "192.168.43.31"
 ADDRESS = (SERVER, PORT)
 HEADER = 64
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "DISCONNECT"
+DISCONNECT_MESSAGE = "disconnect"
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(ADDRESS)
 
 
 def handle_client(conn, addr):
-    print(f"New Connection {addr} Connected")
+    print(f"New Client {addr} Connected")
 
     connected = True
     while connected:
@@ -23,9 +23,9 @@ def handle_client(conn, addr):
             msg = conn.recv(msg_length).decode(FORMAT)
             if msg == DISCONNECT_MESSAGE:
                 connected = False
-
-            print(f"{addr}  {msg}")
-            conn.send("Message received".encode(FORMAT))
+            print(f"Client : {msg}")
+            reply = input("You : ")
+            conn.send(reply.encode(FORMAT))
 
     conn.close()
     print("Connection Closed")
