@@ -3,13 +3,13 @@ import threading
 
 PORT = 5050
 SERVER = "192.168.43.31"
-ADDR = (SERVER, PORT)
+ADDRESS = (SERVER, PORT)
 HEADER = 64
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "DISCONNECT"
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(ADDR)
+s.bind(ADDRESS)
 
 
 def handle_client(conn, addr):
