@@ -1,5 +1,5 @@
 import socket
-import threading
+
 
 PORT = 5050
 SERVER = "192.168.43.31"
@@ -21,10 +21,12 @@ def handle_client(conn, addr):
         if msg_length:
             msg_length = int(msg_length)
             msg = conn.recv(msg_length).decode(FORMAT)
-            if msg == DISCONNECT_MESSAGE:
-                connected = False
+            print(f"Client : {msg}")
+            if msg:
+                print(f"Server : Hello Welcome")
 
-            print(f"{addr}  {msg}")
+
+
 
     conn.close()
     print("Connection Closed")
@@ -35,9 +37,7 @@ def start():
     print(f"Listening to {SERVER}")
     while True:
         conn, addr = s.accept()
-        thread = threading.Thread(target=handle_client, args=(conn, addr))
-        thread.start()
-        print(f"Active Conn {threading.activeCount() - 1}")
+        handle_client(conn, addr)
 
 
 print("Server is Starting")
