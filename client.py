@@ -7,10 +7,6 @@ HEADER = 64
 FORMAT = 'utf-8'
 
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDRESS)
-
-
 def send(msg):
     message = msg.encode(FORMAT)
     msg_length = len(message)
@@ -18,8 +14,11 @@ def send(msg):
     send_length += b' ' * (HEADER - len(send_length))
     client.send(send_length)
     client.send(message)
-    print("Server :",client.recv(1024).decode(FORMAT))
+    print("Server :", client.recv(1024).decode(FORMAT))
 
 
-send("Hello World")
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(ADDRESS)
 
+msg = input("You:")
+send(msg)
