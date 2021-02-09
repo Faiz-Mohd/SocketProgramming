@@ -18,6 +18,7 @@ def send(msg):
     send_length += b' ' * (HEADER - len(send_length))
     client.send(send_length)
     client.send(message)
+    print("Server :",client.recv(1024).decode(FORMAT))
 
 
 send("Hello World")

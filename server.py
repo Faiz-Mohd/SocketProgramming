@@ -1,12 +1,10 @@
 import socket
 
-
 PORT = 5050
 SERVER = "192.168.43.31"
 ADDRESS = (SERVER, PORT)
 HEADER = 64
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "DISCONNECT"
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(ADDRESS)
@@ -23,10 +21,7 @@ def handle_client(conn, addr):
             msg = conn.recv(msg_length).decode(FORMAT)
             print(f"Client : {msg}")
             if msg:
-                print(f"Server : Hello Welcome")
-
-
-
+                conn.send("Message received".encode(FORMAT))
 
     conn.close()
     print("Connection Closed")
